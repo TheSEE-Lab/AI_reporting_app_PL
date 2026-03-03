@@ -8,41 +8,43 @@ xml2_available <- requireNamespace("xml2", quietly = TRUE)
 
 # Global taxonomy choices (used per model)
 taxA_choices_glob <- list(
-  "Idea generation" = "idea generation",
-  "Finding new data sources" = "finding new data sources",
-  "New code generation" = "new code generation",
-  "Statistical model formulation" = "statistical model formulation",
-  "Mathematical calculations/modelling" = "mathematical calculations/modeling",
-  "Generating proposal section" = "generating proposal sections",
-  "New data generation" = "new data generation",
-  "Assets generation" = "assets generation",
-  "Identifying appropriate methods" = "identifying appropriate methods",
-  "Protocol generation/review" = "protocol generation/review",
-  "Code generation for visuals" = "code generation for visuals",
-  "Generative figures" = "generative figures",
-  "Identification of literature to cite" = "identification of literature to cite",
-  "Text generation based on prompts" = "text generation based on prompts"
+  "Generowanie pomysłów" = "generowanie pomysłów",
+  "Znajdowanie nowych źródeł danych" = "znajdowanie nowych źródeł danych",
+  "Generowanie nowego kodu" = "generowanie nowego kodu",
+  "Formułowanie modeli statystycznych" = "formułowanie modeli statystycznych",
+  "Obliczenia/modelowanie matematyczne" = "obliczenia/modelowanie matematyczne",
+  "Generowanie sekcji wniosku" = "generowanie sekcji wniosku",
+  "Generowanie nowych danych" = "generowanie nowych danych",
+  "Generowanie materiałów" = "generowanie materiałów",
+  "Identyfikacja odpowiednich metod" = "identyfikacja odpowiednich metod",
+  "Tworzenie/recenzja protokołów" = "tworzenie/recenzja protokołów",
+  "Generowanie kodu do wizualizacji" = "generowanie kodu do wizualizacji",
+  "Generatywne ryciny" = "generatywne ryciny",
+  "Identyfikacja literatury do cytowania" = "identyfikacja literatury do cytowania",
+  "Generowanie tekstu na podstawie promptów" = "generowanie tekstu na podstawie promptów",
+  "Generowanie slajdów/ilustracji do prezentacji" = "generowanie slajdów/ ilustracji do prezentacji"
 )
 taxB_choices_glob <- list(
-  "Data cleaning" = "data cleaning",
-  "Data annotation" = "data annotation",
-  "Refining existing code" = "refining existing code",
-  "Grant text editing and corrections" = "grant text editing and corrections",
-  "Augmentation of existing data" = "augmentation of existing data",
-  "Modification of existing assets" = "modification of existing assets",
-  "Methods/protocols refinement" = "methods/protocols refinement",
-  "Data cross-checking" = "data cross-checking",
-  "Error management" = "error management",
-  "Review of visual aesthetics" = "review of visual aesthetics",
-  "Bibliography management" = "bibliography management",
-  "Text editing for style/grammar/spelling" = "text editing for style/grammar/spelling"
+  "Czyszczenie danych" = "czyszczenie danych",
+  "Adnotacja danych" = "adnotacja danych",
+  "Doskonalenie istniejącego kodu" = "doskonalenie istniejącego kodu",
+  "Edycja i korekta tekstu wniosku" = "edycja i korekta tekstu wniosku",
+  "Augmentacja istniejących danych" = "augmentacja istniejących danych",
+  "Modyfikacja istniejących materiałów" = "modyfikacja istniejących materiałów",
+  "Doskonalenie metod/protokołów" = "doskonalenie metod/protokołów",
+  "Wzajemna kontrola danych" = "wzajemna kontrola danych",
+  "Zarządzanie błędami" = "zarządzanie błędami",
+  "Ocena estetyki wizualizacji" = "ocena estetyki wizualizacji",
+  "Zarządzanie bibliografią" = "zarządzanie bibliografią",
+  "Redakcja tekstu: styl/gramatyka/ortografia" = "redakcja tekstu: styl/gramatyka/ortografia",
+  "Redakcja i poprawki slajdów prezentacji" = "redakcja i poprawki slajdów prezentacji"
 )
 taxC_choices_glob <- list(
-  "Benchmarking against funding body guidelines" = "benchmarking against funding body guidelines",
-  "Text mining of collected data" = "text mining of collected data",
-  "Summarising multiple data sources" = "summarising multiple data sources",
-  "Comparing multiple approaches" = "comparing multiple approaches",
-  "Identifying contexts for own writing" = "identifying contexts for own writing"
+  "Porównanie z wytycznymi instytucji finansującej" = "porównanie z wytycznymi instytucji finansującej",
+  "Eksploracja tekstów zebranych danych" = "eksploracja tekstów zebranych danych",
+  "Podsumowanie wielu źródeł danych" = "podsumowanie wielu źródeł danych",
+  "Porównywanie wielu podejść" = "porównywanie wielu podejść",
+  "Identyfikacja kontekstów dla własnego tekstu" = "identyfikacja kontekstów dla własnego tekstu"
 )
 
 # Custom message handler to set textarea value
@@ -57,7 +59,7 @@ $(document).on("blur", "input[id^=\'ai_date_\']", function() {
   var val = $(this).val();
   if (val && !/^\\d{4}-\\d{2}-\\d{2}$/.test(val)) {
     $(this).css("border", "2px solid red");
-    alert("Date must be in YYYY-MM-DD format");
+    alert("Data musi być w formacie RRRR-MM-DD");
   } else {
     $(this).css("border", "");
   }
@@ -89,32 +91,32 @@ ui <- fluidPage(
     column(
       width = 7,
       titlePanel("AIdIT"),
-  h4("AI disclosure for Improved Transparency v0.1"),
-  p(HTML("The system allows for selection of standardised AI usage cases and based on the inputs provided, it generates
-  a standardised disclosure statement that can be copy-pasted into the relevant section of a paper. <br><br>
+  h4("Narzędzie do raportowania użycia AI w pracach studenckich i naukowych"),
+  p(HTML("System umożliwia wybór ustandaryzowanych przypadków użycia AI i na podstawie podanych informacji generuje
+  ustandaryzowane oświadczenie o ujawnieniu, które można skopiować i wkleić do odpowiedniej sekcji publikacji. <br><br>
 
-  To use the tools: select whether AI was not used (<b>section 1A</b> - to generate a default negative statement) or
-  specify the AI model(s) used in <b>section 1B</b>. You can select the number of model used - for each AI system you will be
-  able to provide its name, version and (optionally) the usage date (useful as timestamp in cases when versioning for
-  a particular AI model is not available). <br><br>
-  
-  For each model you will be able to select a number of usage categories, grouped into three main areas: content generation,
-  content refinement and content comparisons. Usage categories include: conceptualisation, data curation,
-  formal analysis, funding acquisition, investigation, methods, visualisation, validation and writing. <br><br>
-  
-  In <b>section 2</b> you can provide additional information about your AI usage, including whether you have supervised the
-  AI outputs, whether your use of AI formally complies with ethical guidelines of an institution or funding body,
-  and whether you have archived the prompts used. You can also provide any other comments that will be added verbatim. <br><br>
-  
-  Once you have provided all the relevant information, click the <i>'Generate text'</i> button to produce the disclosure statement,
-  which will appear in the left-hand panel. You can then copy it to clipboard, or download it as XML for later use.
-  The XML file serves as a reproducible record of your AI usage disclosure and can be re-uploaded to restore the form state
-  in case you need to regenerate or modify the disclosure statement at a later time. At any point you clik the <i>'Clear
-  all inputs'</i> button to reset the form.<br><br>"),
+  Aby skorzystać z narzędzia: wybierz, czy AI nie było używane (<b>sekcja 1A</b> &ndash; w celu wygenerowania domyślnego oświadczenia negatywnego) lub
+  wskaż użyte modele AI w <b>sekcji 1B</b>. Możesz określić liczbę użytych modeli &ndash; dla każdego systemu AI będziesz
+  mieć możliwość podania jego nazwy, wersji oraz (opcjonalnie) daty użycia (przydatnej jako znacznik czasu w przypadkach,
+  gdy wersjonowanie danego modelu AI nie jest dostępne). <br><br>
+
+  Dla każdego modelu będziesz mógł/mogła wybrać szereg kategorii użycia, pogrupowanych w trzy główne obszary: generowanie treści,
+  doskonalenie treści oraz porównywanie treści. Kategorie użycia obejmują: konceptualizację, kurację danych,
+  analizę formalną, pozyskiwanie finansowania, badania, metody, wizualizację, walidację oraz pisanie. <br><br>
+
+  W <b>sekcji 2</b> możesz podać dodatkowe informacje dotyczące swojego użycia AI, w tym czy nadzorowałeś/aś
+  wyniki AI, czy Twoje użycie AI formalnie spełnia wymogi etyczne instytucji lub organu finansującego,
+  oraz czy archiwizowałeś/aś użyte prompty. Możesz również dodać inne komentarze, które zostaną włączone dosłownie. <br><br>
+
+  Po podaniu wszystkich istotnych informacji kliknij przycisk <i>&bdquo;Generuj tekst&rdquo;</i>, aby wygenerować oświadczenie o ujawnieniu,
+  które pojawi się w lewym panelu. Możesz następnie skopiować je do schowka lub pobrać jako plik XML do późniejszego użycia.
+  Plik XML stanowi odtwarzalny zapis ujawnienia użycia AI i może zostać ponownie wczytany w celu przywrócenia stanu formularza,
+  jeśli zajdzie potrzeba ponownego wygenerowania lub modyfikacji oświadczenia. W dowolnym momencie możesz kliknąć przycisk <i>&bdquo;Wyczyść
+  wszystkie pola&rdquo;</i>, aby zresetować formularz.<br><br>"),
   style = "max-width: 900px;"),
 
-  p(HTML("<b>Citation:</b> Drobniak SM, Rutkowska J, Arct A, Cendrowska M, Gudowska A, Janas K, Podkowa P,
-  Skorb K, Oles W, Gronowska M, Bikmurzina F, Boron N, Zagalska-Neubauer M, Lagisz M, Nakagawa S. 2025. Unifying
+  p(HTML("<b>Cytacja (opcjonalnie):</b> Drobniak SM, Cendrowska M, Gudowska A, Janas K, Podkowa P,
+  Skorb K, Oles W, Gronowska M, Bikmurzina F, Boron N, Zagalska-Neubauer M, Lagisz M, Nakagawa S, Arct A, Rutkowska J. 2025. Unifying
   framework for reporting of Artificial Intelligence use in research: the AI disclosure for Improved
   Transparency (AIdIT). <i>In preparation</i>."),
   style = "max-width: 750px; font-size: 85%;"),
@@ -124,27 +126,27 @@ ui <- fluidPage(
   # Clear all inputs button
   tags$div(
     style = "margin-bottom: 10px;",
-    actionButton("clear_all", "Clear all inputs", class = "btn-warning")
+    actionButton("clear_all", "Wyczyść wszystkie pola", class = "btn-warning")
   ),
 
-      h4("1A: Negative AI statement (no AI used)"),
+      h4("1A: Oświadczenie o braku użycia AI"),
       checkboxInput("negative",
-        "I have not used any AI tools in this work",
+        "Nie używałem/am żadnych narzędzi AI w tej pracy",
         value = FALSE, width = "60%"
       ),
       # disclosure checkbox only visible when negative is checked
       conditionalPanel(
         condition = "input.negative == true",
         checkboxInput("negative_disclosure",
-          "Disclosure: Any AI‑driven tools embedded by default or running unseen in the software used were unavoidable; the authors accept no liability for their presence.",
+          "Zastrzeżenie: Wszelkie narzędzia oparte na AI, domyślnie wbudowane lub działające w tle w używanym oprogramowaniu, były nieuniknione; autor/autorzy nie ponoszą odpowiedzialności za ich obecność.",
           value = FALSE, width = "60%"
         )
       ),
       hr(),
       # --- New disclosure questions (placed above AI engines listing)
-      h4("1B: Listing of AI engines used in the paper"),
+      h4("1B: Lista modeli AI użytych w pracy"),
       # let user choose how many models to enter (default 1)
-      numericInput("num_models", "No. of AI models used",
+      numericInput("num_models", "Liczba użytych modeli AI",
         value = 1, min = 1, max = 10, step = 1, width = "150px"
       ),
       hr(),
@@ -153,9 +155,9 @@ ui <- fluidPage(
         # header row
         fluidRow(
           column(2, tags$strong("")),
-          column(2, tags$strong("Model name")),
-          column(2, tags$strong("Model version")),
-          column(2, tags$strong("Usage date (optional)"))
+          column(2, tags$strong("Nazwa modelu")),
+          column(2, tags$strong("Wersja modelu")),
+          column(2, tags$strong("Data użycia (opcjonalnie)"))
         ),
         # dynamic rows generated server-side
         uiOutput("ai_rows")
@@ -235,32 +237,32 @@ ui <- fluidPage(
       #   )
       # ),
       br(),
-      h4("2: Additional AI disclosure questions"),
+      h4("2: Dodatkowe pytania dotyczące ujawnienia użycia AI"),
       radioButtons("supervised_verified",
-        label = "Have you supervised the AI model and verified its outputs to avoid errors, halucinations and related issues?",
-        choices = c("Yes" = "yes", "No" = "no",
-        "AI engines running in the background or embedded in other software could not be supervised" = "no_intent"), width = "60%",
+        label = "Czy nadzorowałeś/aś model AI i weryfikowałeś/aś jego wyniki, aby uniknąć błędów, halucynacji i podobnych problemów?",
+        choices = c("Tak" = "yes", "Nie" = "no",
+        "Modele AI działające w tle lub wbudowane w inne oprogramowanie nie mogły być nadzorowane" = "no_intent"), width = "60%",
         selected = NULL
       ),
       radioButtons("ethics_compliance",
-        label = "Have you checked the compliance of your AI usage with ethical guidelines of your institution, the funding agency and any other related entity?",
-        choices = c("Yes" = "yes", "No" = "no"), width = "60%",
+        label = "Czy sprawdziłeś/aś zgodność swojego użycia AI z wytycznymi etycznymi kursu, instytucji, agencji finansującej i innych powiązanych podmiotów?",
+        choices = c("Tak" = "yes", "Nie" = "no"), width = "60%",
         selected = NULL
       ),
       radioButtons("prompts_archived",
-        label = "Have you archived and made available the representative prompts used in generating the AI content?",
+        label = "Czy archiwizowałeś/aś i udostępniłeś/aś reprezentatywne prompty użyte do generowania treści AI?",
         choices = c(
-          "Yes, in the Supplementary Materials" = "supplementary",
-          "Yes, available upon request" = "upon_request",
-          "No" = "no"
+          "Tak, w Materiałach Dodatkowych" = "supplementary",
+          "Tak, dostępne na żądanie" = "upon_request",
+          "Nie" = "no"
         ), width = "60%",
         selected = NULL
       ),
       textAreaInput("other_comments",
-        label = "Any other comments (these will be added verbatim to the generated text)",
+        label = "Inne komentarze (zostaną dodane dosłownie do wygenerowanego tekstu)",
         value = "", rows = 3, width = "60%"
       ),
-      actionButton("generate", "Generate text", class = "btn-primary"),
+      actionButton("generate", "Generuj tekst", class = "btn-primary"),
       br(),
       br()
     ),
@@ -271,18 +273,18 @@ ui <- fluidPage(
       br(),
       br(),
       wellPanel(
-        h4("Generated text (read-only)"),
+        h4("Wygenerowany tekst (tylko do odczytu)"),
         tags$textarea(id = "generated_text", rows = 10, style = "width:100%;", readonly = NA),
         br(),
-        actionButton("copy_btn", "Copy to clipboard"),
+        actionButton("copy_btn", "Kopiuj do schowka"),
         br(),
         br(),
-        downloadButton("download_xml", "Download XML", class = "btn-secondary"),
+        downloadButton("download_xml", "Pobierz XML", class = "btn-secondary"),
         br(),
         br(),
-        fileInput("upload_xml", "Load from XML", accept = c(".xml")),
+        fileInput("upload_xml", "Wczytaj z XML", accept = c(".xml")),
         {
-          xml_msg <- if (xml2_available) "XML import/export available." else "Install the xml2 package to enable XML import/export."
+          xml_msg <- if (xml2_available) "Import/eksport XML dostępny." else "Zainstaluj pakiet xml2, aby włączyć import/eksport XML."
           tags$small(xml_msg)
         }
       )
@@ -299,9 +301,9 @@ server <- function(input, output, session) {
   make_text <- function() {
     # If the user ticks the negative checkbox, return the fixed negative statement
     if (!is.null(input$negative) && isTRUE(input$negative)) {
-      neg_text <- "No AI tools were intentionally used in this study or in writing this paper."
+      neg_text <- "W trakcie prac nad niniejszym tekstem/artykułem na adnym etapie nie używano świadomie żadnych narzędzi AI."
       if (!is.null(input$negative_disclosure) && isTRUE(input$negative_disclosure)) {
-        neg_text <- paste(neg_text, "Any AI‑driven tools embedded by default or running unseen in the software used were unavoidable; the authors accept no liability for their presence.")
+        neg_text <- paste(neg_text, "Wszelkie narzędzia oparte na AI, domyślnie wbudowane lub działające w tle w używanym oprogramowaniu, były nieuniknione; autor/autorzy nie ponoszą odpowiedzialności za ich obecność.")
       }
       return(neg_text)
     }
@@ -321,7 +323,7 @@ server <- function(input, output, session) {
       # Validate date format if provided
       if (!is.null(date) && nzchar(trimws(date))) {
         if (!grepl("^\\d{4}-\\d{2}-\\d{2}$", date)) {
-          stop(paste0("Invalid date format for model ", i, ". Please use YYYY-MM-DD format."))
+          stop(paste0("Nieprawidłowy format daty dla modelu ", i, ". Proszę użyć formatu RRRR-MM-DD."))
         }
       }
 
@@ -331,13 +333,13 @@ server <- function(input, output, session) {
       }
       # collect taxonomy uses for this model from all fragmented inputs
       uses <- character(0)
-      # Collect from taxA1-taxA8
-      for (j in 1:8) {
+      # Collect from taxA1-taxA9
+      for (j in 1:9) {
         vals <- input[[paste0("taxA", j, "_", i)]]
         if (!is.null(vals) && length(vals) > 0) uses <- c(uses, vals)
       }
-      # Collect from taxB1-taxB8
-      for (j in 1:8) {
+      # Collect from taxB1-taxB9
+      for (j in 1:9) {
         vals <- input[[paste0("taxB", j, "_", i)]]
         if (!is.null(vals) && length(vals) > 0) uses <- c(uses, vals)
       }
@@ -378,9 +380,9 @@ server <- function(input, output, session) {
 
     # base composed text
     base_text <- if (nzchar(per_model_usage_str)) {
-      paste0("We used the following AI engines in the present study: ", paste(model_metas, collapse = "; "), ". Area(s) of generative AI usage: ", per_model_usage_str, ".")
+      paste0("W niniejszej pracy wykorzystano następujące systemy AI: ", paste(model_metas, collapse = "; "), ". Obszar(y) użycia generatywnej AI: ", per_model_usage_str, ".")
     } else {
-      paste0("We used the following AI engines in the present study: ", paste(model_metas, collapse = "; "), ". Area(s) of generative AI usage: ", opts_str, ".")
+      paste0("W niniejszej pracy wykorzystano następujące systemy AI: ", paste(model_metas, collapse = "; "), ". Obszar(y) użycia generatywnej AI: ", opts_str, ".")
     }
 
     # Add-on sentences based on the new questions
@@ -389,23 +391,23 @@ server <- function(input, output, session) {
     # Q1: supervised_verified
     sv <- input$supervised_verified
     if (!is.null(sv) && sv == "yes") {
-      addons <- c(addons, "The authors declare that they have verified and approved all content generated or modified by the AI tools used.")
+      addons <- c(addons, "Autor/autorzy oświadczają, że zweryfikowali i zatwierdzili wszystkie treści wygenerowane lub zmodyfikowane przez używane narzędzia AI.")
     } else if (!is.null(sv) && sv == "no_intent") {
-      addons <- c(addons, "Any AI‑driven tools embedded by default or running unseen in the software used were not supervised due to objective reasons.")
+      addons <- c(addons, "Narzędzia oparte na AI działające w tle lub wbudowane w inne oprogramowanie nie mogły być nadzorowane z obiektywnych przyczyn.")
     }
 
     # Q2: ethics_compliance
     ec <- input$ethics_compliance
     if (!is.null(ec) && ec == "yes") {
-      addons <- c(addons, "The use of AI in this paper was in compliance with the ethical regulations of all funders and host institutions.")
+      addons <- c(addons, "Użycie AI w niniejszej pracy było zgodne z przepisami etycznymi kursu, wszystkich instytucji finansujących i współpracujących.")
     }
 
     # Q3: prompts_archived
     pa <- input$prompts_archived
     if (!is.null(pa) && pa == "supplementary") {
-      addons <- c(addons, "Representative prompts used in AI content generation are available in the Supplementary Materials.")
+      addons <- c(addons, "Reprezentatywne prompty użyte do generowania treści AI są dostępne w Materiałach Dodatkowych.")
     } else if (!is.null(pa) && pa == "upon_request") {
-      addons <- c(addons, "Representative prompts used in AI content generation are available upon request.")
+      addons <- c(addons, "Reprezentatywne prompty użyte do generowania treści AI są dostępne na żądanie.")
     }
 
     # Q4: other_comments (free text, add verbatim if non-empty)
@@ -452,74 +454,78 @@ server <- function(input, output, session) {
 
       tagList(
         fluidRow(
-          column(2, tags$div(style = "margin-top:6px;", tags$em("Enter details of AI model used:"))),
+          column(2, tags$div(style = "margin-top:6px;", tags$em("Podaj szczegóły użytego modelu AI:"))),
           column(2, textInput(paste0("ai_name_", i), label = NULL, value = if (is.null(current_name)) "" else current_name)),
           column(2, textInput(paste0("ai_version_", i), label = NULL, value = if (is.null(current_version)) "" else current_version)),
           column(2, textInput(paste0("ai_date_", i), label = NULL, value = if (is.null(current_date)) "" else current_date, placeholder = "YYYY-MM-DD"))
         ),
         # taxonomy for this model: three groups with section labels
-        h5("This AI engine was used in content ..."),
+        h5("Ten model AI był używany do ..."),
         fluidRow(
           column(
             3,
             div(
               class = "group-box group-red",
-              tags$div(class = "group-title", "... generation"),
-              h6("Conceptualisation"),
+              tags$div(class = "group-title", "... generowania treści"),
+              h6("Konceptualizacja"),
               checkboxGroupInput(paste0("taxA1_", i), label = NULL, choices = taxA_choices_glob[1], selected = isolate(input[[paste0("taxA1_", i)]])),
-              h6("Data curation"),
+              h6("Nadzór nad danymi"),
               checkboxGroupInput(paste0("taxA2_", i), label = NULL, choices = taxA_choices_glob[2], selected = isolate(input[[paste0("taxA2_", i)]])),
-              h6("Formal analysis"),
+              h6("Analiza formalna"),
               checkboxGroupInput(paste0("taxA3_", i), label = NULL, choices = taxA_choices_glob[3:5], selected = isolate(input[[paste0("taxA3_", i)]])),
-              h6("Funding acquisition"),
+              h6("Pozyskiwanie finansowania"),
               checkboxGroupInput(paste0("taxA4_", i), label = NULL, choices = taxA_choices_glob[6], selected = isolate(input[[paste0("taxA4_", i)]])),
-              h6("Investigation"),
+              h6("Badania własne"),
               checkboxGroupInput(paste0("taxA5_", i), label = NULL, choices = taxA_choices_glob[7:8], selected = isolate(input[[paste0("taxA5_", i)]])),
-              h6("Methods"),
+              h6("Metody"),
               checkboxGroupInput(paste0("taxA6_", i), label = NULL, choices = taxA_choices_glob[9:10], selected = isolate(input[[paste0("taxA6_", i)]])),
-              h6("Visualisation"),
+              h6("Wizualizacja"),
               checkboxGroupInput(paste0("taxA7_", i), label = NULL, choices = taxA_choices_glob[11:12], selected = isolate(input[[paste0("taxA7_", i)]])),
-              h6("Writing"),
-              checkboxGroupInput(paste0("taxA8_", i), label = NULL, choices = taxA_choices_glob[13:14], selected = isolate(input[[paste0("taxA8_", i)]]))
+              h6("Pisanie"),
+              checkboxGroupInput(paste0("taxA8_", i), label = NULL, choices = taxA_choices_glob[13:14], selected = isolate(input[[paste0("taxA8_", i)]])),
+              h6("Tworzenie prezentacji"),
+              checkboxGroupInput(paste0("taxA9_", i), label = NULL, choices = taxA_choices_glob[15], selected = isolate(input[[paste0("taxA9_", i)]]))
             )
           ),
           column(
             3,
             div(
               class = "group-box group-green",
-              tags$div(class = "group-title", "... refining"),
-              h6("Data curation"),
+              tags$div(class = "group-title", "... doskonalenie i rewizja treści"),
+              h6("Nadzór nad danymi"),
               checkboxGroupInput(paste0("taxB1_", i), label = NULL, choices = taxB_choices_glob[1:2], selected = isolate(input[[paste0("taxB1_", i)]])),
-              h6("Formal analysis"),
+              h6("Analiza formalna"),
               checkboxGroupInput(paste0("taxB2_", i), label = NULL, choices = taxB_choices_glob[3], selected = isolate(input[[paste0("taxB2_", i)]])),
-              h6("Funding acquisition"),
+              h6("Pozyskiwanie finansowania"),
               checkboxGroupInput(paste0("taxB3_", i), label = NULL, choices = taxB_choices_glob[4], selected = isolate(input[[paste0("taxB3_", i)]])),
-              h6("Investigation"),
+              h6("Badania własne"),
               checkboxGroupInput(paste0("taxB4_", i), label = NULL, choices = taxB_choices_glob[5:6], selected = isolate(input[[paste0("taxB4_", i)]])),
-              h6("Methods"),
+              h6("Metody"),
               checkboxGroupInput(paste0("taxB5_", i), label = NULL, choices = taxB_choices_glob[7], selected = isolate(input[[paste0("taxB5_", i)]])),
-              h6("Validation"),
+              h6("Walidacja"),
               checkboxGroupInput(paste0("taxB6_", i), label = NULL, choices = taxB_choices_glob[8:9], selected = isolate(input[[paste0("taxB6_", i)]])),
-              h6("Visualisation"),
+              h6("Wizualizacja"),
               checkboxGroupInput(paste0("taxB7_", i), label = NULL, choices = taxB_choices_glob[10], selected = isolate(input[[paste0("taxB7_", i)]])),
-              h6("Writing"),
-              checkboxGroupInput(paste0("taxB8_", i), label = NULL, choices = taxB_choices_glob[11:12], selected = isolate(input[[paste0("taxB8_", i)]]))
+              h6("Pisanie"),
+              checkboxGroupInput(paste0("taxB8_", i), label = NULL, choices = taxB_choices_glob[11:12], selected = isolate(input[[paste0("taxB8_", i)]])),
+              h6("Tworzenie prezentacji"),
+              checkboxGroupInput(paste0("taxB9_", i), label = NULL, choices = taxB_choices_glob[13], selected = isolate(input[[paste0("taxB9_", i)]]))
             )
           ),
           column(
             3,
             div(
               class = "group-box group-blue",
-              tags$div(class = "group-title", "... comparisons"),
-              h6("Conceptualisation"),
+              tags$div(class = "group-title", "... porównywania i syntezy treści"),
+              h6("Konceptualizacja"),
               checkboxGroupInput(paste0("taxC1_", i), label = NULL, choices = taxC_choices_glob[1], selected = isolate(input[[paste0("taxC1_", i)]])),
-              h6("Data curation"),
+              h6("Nadzór nad danymi"),
               checkboxGroupInput(paste0("taxC2_", i), label = NULL, choices = taxC_choices_glob[2], selected = isolate(input[[paste0("taxC2_", i)]])),
-              h6("Formal analysis"),
+              h6("Analiza formalna"),
               checkboxGroupInput(paste0("taxC3_", i), label = NULL, choices = taxC_choices_glob[3], selected = isolate(input[[paste0("taxC3_", i)]])),
-              h6("Funding acquisition"),
+              h6("Pozyskiwanie finansowania"),
               checkboxGroupInput(paste0("taxC4_", i), label = NULL, choices = taxC_choices_glob[4], selected = isolate(input[[paste0("taxC4_", i)]])),
-              h6("Writing"),
+              h6("Pisanie"),
               checkboxGroupInput(paste0("taxC5_", i), label = NULL, choices = taxC_choices_glob[5], selected = isolate(input[[paste0("taxC5_", i)]]))
             )
           )
@@ -604,7 +610,7 @@ server <- function(input, output, session) {
 
         # Clear pending data
         pending_xml_load(NULL)
-        showNotification("XML imported, form updated", type = "message")
+        showNotification("XML zaimportowany, formularz zaktualizowany", type = "message")
       })
     }
   })
@@ -664,7 +670,7 @@ server <- function(input, output, session) {
     },
     content = function(file) {
       if (!xml2_available) {
-        showNotification("xml2 package not available; cannot export XML", type = "error")
+        showNotification("Pakiet xml2 nie jest dostępny; eksport XML niemożliwy", type = "error")
         return()
       }
       # build XML
@@ -735,13 +741,13 @@ server <- function(input, output, session) {
       return()
     }
     if (!xml2_available) {
-      showNotification("xml2 package not available; cannot import XML", type = "error")
+      showNotification("Pakiet xml2 nie jest dostępny; import XML niemożliwy", type = "error")
       return()
     }
     path <- input$upload_xml$datapath
     doc <- tryCatch(xml2::read_xml(path), error = function(e) NULL)
     if (is.null(doc)) {
-      showNotification("Failed to parse XML", type = "error")
+      showNotification("Nie udało się przetworzyć pliku XML", type = "error")
       return()
     }
 

@@ -1,24 +1,24 @@
 # AIdIT
-## AI disclosure for Improved Transparency v0.1
+## Narzędzie da raportowania uycia generatywnej sztucznej inteligencji (AI) w pracach badawczych, zaliczeniowych, dyplomowych etc.
 
-The system allows for selection of standardised AI usage cases and based on the inputs provided, it generates
-a standardised disclosure statement that can be copy-pasted into the relevant section of a paper.
+System umożliwia wybór ustandaryzowanych przypadków użycia AI i na podstawie podanych informacji generuje
+ustandaryzowane oświadczenie o ujawnieniu, które można skopiować i wkleić do odpowiedniej sekcji publikacji.
 
-To use the tools: select whether AI was not used (**section 1A** - to generate a default negative statement) or
-specify the AI model(s) used in **section 1B**. You can select the number of model used - for each AI system you will be
-able to provide its name, version and (optionally) the usage date (useful as timestamp in cases when versioning for
-a particular AI model is not available).
-  
-For each model you will be able to select a number of usage categories, grouped into three main areas: content generation,
-content refinement and content comparisons. Usage categories include: conceptualisation, data curation,
-formal analysis, funding acquisition, investigation, methods, visualisation, validation and writing.
-  
-In **section 2** you can provide additional information about your AI usage, including whether you have supervised the
-AI outputs, whether your use of AI formally complies with ethical guidelines of an institution or funding body,
-and whether you have archived the prompts used. You can also provide any other comments that will be added verbatim.
-  
-Once you have provided all the relevant information, click the *'Generate text'* button to produce the disclosure statement,
-which will appear in the left-hand panel. You can then copy it to clipboard, or download it as XML for later use.
-The XML file serves as a reproducible record of your AI usage disclosure and can be re-uploaded to restore the form state
-in case you need to regenerate or modify the disclosure statement at a later time. At any point you clik the *'Clear
-all inputs'* button to reset the form.
+Aby skorzystać z narzędzia: wybierz, czy AI nie było używane (**sekcja 1A** – w celu wygenerowania domyślnego oświadczenia negatywnego) lub
+wskaż użyte modele AI w **sekcji 1B**. Możesz określić liczbę użytych modeli – dla każdego systemu AI będziesz
+mieć możliwość podania jego nazwy, wersji oraz (opcjonalnie) daty użycia (przydatnej jako znacznik czasu w przypadkach,
+gdy wersjonowanie danego modelu AI nie jest dostępne).
+
+Dla każdego modelu będziesz mógł wybrać szereg kategorii użycia, pogrupowanych w trzy główne obszary: generowanie treści,
+doskonalenie treści oraz porównywanie treści. Kategorie użycia obejmują: konceptualizację, kurację danych,
+analizę formalną, pozyskiwanie finansowania, badania, metody, wizualizację, walidację oraz pisanie.
+
+W **sekcji 2** możesz podać dodatkowe informacje dotyczące swojego użycia AI, w tym czy nadzorowałeś
+wyniki AI, czy Twoje użycie AI formalnie spełnia wymogi etyczne instytucji lub organu finansującego,
+oraz czy archiwizowałeś użyte prompty. Możesz również dodać inne komentarze, które zostaną włączone dosłownie.
+
+Po podaniu wszystkich istotnych informacji kliknij przycisk *'Generuj tekst'*, aby wygenerować oświadczenie o ujawnieniu,
+które pojawi się w lewym panelu. Możesz następnie skopiować je do schowka lub pobrać jako plik XML do późniejszego użycia.
+Plik XML stanowi odtwarzalny zapis ujawnienia użycia AI i może zostać ponownie wczytany w celu przywrócenia stanu formularza,
+jeśli zajdzie potrzeba ponownego wygenerowania lub modyfikacji oświadczenia. W dowolnym momencie możesz kliknąć przycisk *'Wyczyść
+wszystkie pola'*, aby zresetować formularz.
