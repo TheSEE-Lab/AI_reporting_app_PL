@@ -91,13 +91,13 @@ ui <- fluidPage(
     # Right: options (wider)
     column(
       width = 7,
-      titlePanel("AIdIT"),
-  h4("Narzędzie do raportowania użycia AI w pracach studenckich i naukowych"),
+      titlePanel("GSI na Uniwersytecie Jagiellońskim"),
+  h4("Narzędzie do raportowania użycia Generatywnej Sztucznej Inteligencji (GSI/AI) w pracach studenckich i naukowych"),
   p(HTML("System umożliwia wybór ustandaryzowanych przypadków użycia GSI i na podstawie podanych informacji generuje
   ustandaryzowane oświadczenie o ujawnieniu, które można skopiować i wkleić do odpowiedniej sekcji publikacji. <br><br>
 
   Aby skorzystać z narzędzia: wybierz, czy GSI nie było używane (<b>sekcja 1A</b> &ndash; w celu wygenerowania domyślnego oświadczenia negatywnego) lub
-  wskaż użyte modele AI w <b>sekcji 1B</b>. Możesz określić liczbę użytych modeli &ndash; dla każdego systemu GSI będziesz
+  wskaż użyte modele GSI w <b>sekcji 1B</b>. Możesz określić liczbę użytych modeli &ndash; dla każdego systemu GSI będziesz
   mieć możliwość podania jego nazwy, wersji oraz (opcjonalnie) daty użycia (przydatnej jako znacznik czasu w przypadkach,
   gdy wersjonowanie danego modelu GSI nie jest dostępne). <br><br>
 
@@ -111,7 +111,7 @@ ui <- fluidPage(
 
   Po podaniu wszystkich istotnych informacji kliknij przycisk <i>&bdquo;Generuj tekst&rdquo;</i>, aby wygenerować oświadczenie o ujawnieniu,
   które pojawi się w lewym panelu. Możesz następnie skopiować je do schowka lub pobrać jako plik XML do późniejszego użycia.
-  Plik XML stanowi odtwarzalny zapis ujawnienia użycia AI i może zostać ponownie wczytany w celu przywrócenia stanu formularza,
+  Plik XML stanowi odtwarzalny zapis ujawnienia użycia GSI i może zostać ponownie wczytany w celu przywrócenia stanu formularza,
   jeśli zajdzie potrzeba ponownego wygenerowania lub modyfikacji oświadczenia. W dowolnym momencie możesz kliknąć przycisk <i>&bdquo;Wyczyść
   wszystkie pola&rdquo;</i>, aby zresetować formularz.<br><br>"),
   style = "max-width: 900px;"),
@@ -302,9 +302,9 @@ server <- function(input, output, session) {
   make_text <- function() {
     # If the user ticks the negative checkbox, return the fixed negative statement
     if (!is.null(input$negative) && isTRUE(input$negative)) {
-      neg_text <- "W trakcie prac nad niniejszym tekstem/artykułem na adnym etapie nie używano świadomie żadnych narzędzi AI."
+      neg_text <- "W trakcie prac nad niniejszym tekstem/artykułem na adnym etapie nie używano świadomie żadnych narzędzi GSI."
       if (!is.null(input$negative_disclosure) && isTRUE(input$negative_disclosure)) {
-        neg_text <- paste(neg_text, "Wszelkie narzędzia oparte na AI, domyślnie wbudowane lub działające w tle w używanym oprogramowaniu, były nieuniknione; autor/autorzy nie ponoszą odpowiedzialności za ich obecność.")
+        neg_text <- paste(neg_text, "Wszelkie narzędzia oparte na GSI, domyślnie wbudowane lub działające w tle w używanym oprogramowaniu, były nieuniknione; autor/autorzy nie ponoszą odpowiedzialności za ich obecność.")
       }
       return(neg_text)
     }
@@ -314,7 +314,7 @@ server <- function(input, output, session) {
     # opts <- opts[!is.null(opts) & nzchar(opts)]
     # opts_str <- if (length(opts) == 0) "none" else paste(opts, collapse = "; ")
 
-    # Gather AI model rows (dynamic number specified by num_models)
+    # Gather GSI model rows (dynamic number specified by num_models)
     n_models <- if (!is.null(input$num_models) && input$num_models >= 1) as.integer(input$num_models) else 1L
     rows <- lapply(seq_len(n_models), function(i) {
       name <- input[[paste0("ai_name_", i)]]
