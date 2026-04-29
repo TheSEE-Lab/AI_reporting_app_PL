@@ -91,7 +91,7 @@ ui <- fluidPage(
     # Right: options (wider)
     column(
       width = 7,
-      titlePanel("GSI na Uniwersytecie Jagiellońskim"),
+      titlePanel("GSI na Wydziale Biologii UJ"),
   h4("Narzędzie do raportowania użycia Generatywnej Sztucznej Inteligencji (GSI/AI) w pracach studenckich i naukowych"),
   p(HTML("System umożliwia wybór ustandaryzowanych przypadków użycia GSI i na podstawie podanych informacji generuje
   ustandaryzowane oświadczenie o ujawnieniu, które można skopiować i wkleić do odpowiedniej sekcji publikacji. <br><br>
