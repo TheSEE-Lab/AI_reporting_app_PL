@@ -91,7 +91,10 @@ ui <- fluidPage(
     # Right: options (wider)
     column(
       width = 7,
-      titlePanel("GRONOST<b>AI</b>"),
+      titlePanel(tagList(
+        "GRONOST",
+        tags$strong("AI")
+      )),
   h4("Generator Raportów O Narzędziach i Sposobach wykorzystania AI"),
   p(HTML("System umożliwia wybór ustandaryzowanych przypadków użycia GSI i na podstawie podanych informacji generuje
   wystandaryzowane oświadczenie o ujawnieniu wykorzystania GSI, które można skopiować i wkleić do odpowiedniej sekcji publikacji lub pracy. <br><br>
