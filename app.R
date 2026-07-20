@@ -117,9 +117,9 @@ ui <- fluidPage(
   style = "max-width: 900px;"),
 
   p(HTML("<b>Cytacja (opcjonalnie):</b> Drobniak SM, Cendrowska M, Gudowska A, Janas K, Podkowa P,
-  Skorb K, Oles W, Gronowska M, Bikmurzina F, Boron N, Zagalska-Neubauer M, Lagisz M, Nakagawa S, Arct A, Rutkowska J. 2025. Unifying
-  framework for reporting of Artificial Intelligence use in research: the AI disclosure for Improved
-  Transparency (AIdIT). <i>In preparation</i>."),
+  Skorb K, Oles W, Gronowska M, Bikmurzina F, Boron N, Zagalska-Neubauer M, Lagisz M, Nakagawa S, Arct A, Rutkowska J. 2026. A systematic map of generative AI
+  guidelines and reporting in ecology and evolutionary biology: towards the framework of AI disclosure for Improved Transparency (AIdIT).
+  Research Integrity & Peer Review (in press). <a href='https://doi.org/10.1186/s41073-026-00230-1'>https://doi.org/10.1186/s41073-026-00230-1</a>"),
   style = "max-width: 750px; font-size: 85%;"),
 
   hr(),
