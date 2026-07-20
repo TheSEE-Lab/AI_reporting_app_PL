@@ -91,10 +91,10 @@ ui <- fluidPage(
     # Right: options (wider)
     column(
       width = 7,
-      titlePanel("GSI na Wydziale Biologii UJ"),
-  h4("Narzędzie do raportowania użycia Generatywnej Sztucznej Inteligencji (GSI/AI) w pracach studenckich i naukowych"),
+      titlePanel("GRONOST<b>AI</b>"),
+  h4("Generator Raportów O Narzędziach i Sposobach wykorzystania AI"),
   p(HTML("System umożliwia wybór ustandaryzowanych przypadków użycia GSI i na podstawie podanych informacji generuje
-  ustandaryzowane oświadczenie o ujawnieniu, które można skopiować i wkleić do odpowiedniej sekcji publikacji. <br><br>
+  wystandaryzowane oświadczenie o ujawnieniu wykorzystania GSI, które można skopiować i wkleić do odpowiedniej sekcji publikacji lub pracy. <br><br>
 
   Aby skorzystać z narzędzia: wybierz, czy GSI nie było używane (<b>sekcja 1A</b> &ndash; w celu wygenerowania domyślnego oświadczenia negatywnego) lub
   wskaż użyte modele GSI w <b>sekcji 1B</b>. Możesz określić liczbę użytych modeli &ndash; dla każdego systemu GSI będziesz
